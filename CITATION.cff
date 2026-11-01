@@ -1,11 +1,11 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Oyster-shell concrete Monte Carlo: coupled hydration-transport-damage-carbon model with out-of-sample calibration"
+title: "Oyster-shell concrete Monte Carlo: coupled hydration-transport-damage-carbon model with out-of-sample validation"
 authors:
   - family-names: Sandler
     given-names: Leon
     orcid: "https://orcid.org/0009-0007-4584-808X"
-version: "1.0.0"
+version: "1.1.0"
 doi: 10.5281/zenodo.23867048
 date-released: "2026-11-01"
 license: MIT

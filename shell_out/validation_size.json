@@ -1,0 +1,148 @@
+{
+ "tol": 0.07,
+ "datasets": {
+  "ABBAS": {
+   "note": "scallop shell, concrete",
+   "B": 350.0,
+   "w": 160.0,
+   "items": [
+    {
+     "name": "S0F15",
+     "r": 0.14285714285714285,
+     "d_um": 90.0,
+     "observed": 1.0
+    },
+    {
+     "name": "S15F15",
+     "r": 0.2714285714285714,
+     "d_um": 64.0,
+     "observed": 0.8648999999999999
+    },
+    {
+     "name": "S30F15",
+     "r": 0.4,
+     "d_um": 55.0,
+     "observed": 0.75
+    }
+   ]
+  },
+  "KWON": {
+   "note": "oyster shell powder, mortar; particle size not reported (30 um assumed)",
+   "B": 568.16,
+   "w": 284.08,
+   "items": [
+    {
+     "name": "OSP15",
+     "r": 0.15,
+     "d_um": 30.0,
+     "observed": 0.6524390243902439
+    },
+    {
+     "name": "OSP30",
+     "r": 0.3,
+     "d_um": 30.0,
+     "observed": 0.4288617886178862
+    }
+   ]
+  },
+  "ABIN": {
+   "note": "oyster shell, concrete; binder content assumed 400 kg/m3, size 30 um assumed; secondary transcription",
+   "B": 400.0,
+   "w": 160.0,
+   "items": [
+    {
+     "name": "r2.5",
+     "r": 0.025,
+     "d_um": 30.0,
+     "observed": 1.0526315789473684
+    },
+    {
+     "name": "r5",
+     "r": 0.05,
+     "d_um": 30.0,
+     "observed": 1.105263157894737
+    },
+    {
+     "name": "r7.5",
+     "r": 0.075,
+     "d_um": 30.0,
+     "observed": 1.0526315789473684
+    },
+    {
+     "name": "r10",
+     "r": 0.1,
+     "d_um": 30.0,
+     "observed": 1.0394736842105263
+    }
+   ]
+  },
+  "MEX": {
+   "note": "oyster-shell CaCO3, untreated, mortar 1:4, w/c 0.68; size = sieve aperture; 10 wt% interpreted as replacement",
+   "B": 369.71830985915494,
+   "w": 251.40845070422537,
+   "items": [
+    {
+     "name": "0.14 mm",
+     "r": 0.1,
+     "d_um": 140.0,
+     "observed": 1.036764705882353
+    },
+    {
+     "name": "0.17 mm",
+     "r": 0.1,
+     "d_um": 170.0,
+     "observed": 0.9779411764705883
+    },
+    {
+     "name": "0.25 mm",
+     "r": 0.1,
+     "d_um": 250.0,
+     "observed": 1.0
+    },
+    {
+     "name": "0.42 mm",
+     "r": 0.1,
+     "d_um": 420.0,
+     "observed": 1.0147058823529413
+    },
+    {
+     "name": "0.84 mm",
+     "r": 0.1,
+     "d_um": 840.0,
+     "observed": 0.8823529411764706
+    }
+   ]
+  }
+ },
+ "per_study_kf": {
+  "ABBAS": {
+   "n_accepted": 0,
+   "best_grid_kf": 0.7000000000000002,
+   "min_sse": 0.013945408635126558
+  },
+  "KWON": {
+   "n_accepted": 19319,
+   "median": -0.3212345192737327,
+   "p10": -0.5348837945214835,
+   "p90": -0.13770384336159755,
+   "mean": -0.32787709953117805,
+   "sd": 0.15135092508212114
+  },
+  "ABIN": {
+   "n_accepted": 24082,
+   "median": 1.1850823161499664,
+   "p10": 0.9919474904641986,
+   "p90": 1.3722555169435873,
+   "mean": 1.1809023573308701,
+   "sd": 0.14742517222488422
+  },
+  "MEX": {
+   "n_accepted": 0,
+   "best_grid_kf": 1.5,
+   "min_sse": 0.017948441102211467
+  }
+ },
+ "frozen": {},
+ "comparison": {},
+ "note": "no draw reproduces the calibration mixes within the tolerance; frozen predictions not computed"
+}

@@ -22,6 +22,8 @@ from scipy.special import erfc
 from scipy.stats import qmc
 
 R_GAS = 8.314
+KF_COUPLE_POROSITY = False     # v3 switch: strength-only efficiency (False) or efficiency that also refines the pores (True)
+KF_SIZE_DEP = False             # v3 switch: efficiency independent of particle size (False) or scaled by fineness(d)/fineness(45 um) (True)
 DT = 0.125
 T_AX = np.arange(DT, 100.01, DT)
 NT = len(T_AX)
@@ -126,7 +128,9 @@ def mixture(B, w, r):
 def fc_series(d, alpha, vc, vw, r, d_um, rho_p2=0.0):
     kf = d.get("kf")                                     # v3: optional filler efficiency (k-value): the strength model counts c + kf*s as cementing mass
     if kf is not None and r > 0:
-        vc = vc * (1.0 + kf * r / max(1.0 - r, 1e-3))
+        if KF_SIZE_DEP:
+            kf = kf * fineness(d_um) / fineness(45.0)
+        vc = vc * np.maximum(1.0 + kf * r / max(1.0 - r, 1e-3), 0.0)      # effective cementing mass cannot be negative
     X = 2.06 * alpha * vc[:, None] / (vw[:, None] + alpha * vc[:, None])
     pack = 1 + d["bpack"] * fineness(d_um) * r * (1 - r)
     S0e = d["S0"] * 0.742 ** (2.0 - d["kap_s"])          # keeps nominal OPC strength (w/c 0.45) fixed for any exponent
@@ -180,6 +184,7 @@ def sigmoid(x):
 
 def evaluate(case, d, cfg, ref=None, keep=False):
     path = cfg.get("path", "OPC"); r = cfg.get("r", 0.0) if path == "P1" else 0.0
+    fs = cfg.get("fs", 0.5) if path == "BLEND" else 0.0          # v3: blended-cement reference, slag fraction of the binder (screening treatment, see manuscript)
     rho = cfg.get("rho", 0.0) if path == "P2" else 0.0
     d_um = cfg.get("d_um", 30.0); sev = cfg.get("sev", 1); load = cfg.get("load", 1); bbio = cfg.get("beta_bio", 0.0)
     N = len(d["B"]); B0 = d["B"].copy(); w = d["wb"] * B0; Tc = d["Tcure"]
@@ -196,7 +201,10 @@ def evaluate(case, d, cfg, ref=None, keep=False):
     fc28v = fc_series(d, a6[:, 3:4], vc, vw, r, d_um, rho_arr)[:, 0]
     Eg = 4700.0 * np.sqrt(fcg); frg = 0.62 * np.sqrt(fcg)
     a28 = a6[:, 3]
-    phi_cap = np.maximum(vw - 1.06 * a28 * vc, 0.002); phi_p = phi_cap / (vc + vf + vw)
+    vce = vc
+    if KF_COUPLE_POROSITY and d.get("kf") is not None and r > 0:
+        kfe = d["kf"] * (fineness(d_um) / fineness(45.0) if KF_SIZE_DEP else 1.0); vce = vc * np.maximum(1.0 + kfe * r / max(1.0 - r, 1e-3), 0.0)
+    phi_cap = np.maximum(vw - 1.06 * a28 * vce, 0.002); phi_p = phi_cap / (vc + vf + vw)
     out = dict(matched=matched, fc28=fc28v, alpha=a6, phi_cap=phi_cap, phi_p=phi_p, B=B, c=c, s=s_mass, fr28=0.62 * np.sqrt(fc28v))
 
     h = lambda x: 1 - (x / 100.0) ** 3
@@ -219,7 +227,7 @@ def evaluate(case, d, cfg, ref=None, keep=False):
     D_wc = d["lamD"] * 10 ** (-12.06 + 2.40 * np.clip(w / np.maximum(c, 1e-6), 0.25, 1.5))     # cement-only w/c mapping (pessimistic for filler)
     D28 = np.exp((1 - d["chi_D"]) * np.log(D_phi) + d["chi_D"] * np.log(D_wc))
     fT = np.exp(d["UD"] / R_GAS * (1 / 293.15 - 1 / (d["Tenv"] + 273.15)))
-    m = np.minimum(d["m0"] + d["omega"] * r, 0.6)
+    m = np.minimum(d["m0"] + d["omega"] * r + 0.4 * fs / 0.7, 0.6)      # Life-365 treatment: slag raises the age exponent, D28 at equal w/cm unchanged
     Dt = (D28 * fT)[:, None] * (28.0 / (28.0 + T_AX * 365.25)[None, :]) ** m[:, None]
     ysec = 365.25 * 86400.0; tsec = T_AX * ysec
     Dch = np.zeros((N, NT)); Dab = np.zeros((N, NT)); x_acid = np.zeros((N, NT)); x_leach = np.zeros((N, NT))
@@ -278,6 +286,8 @@ def evaluate(case, d, cfg, ref=None, keep=False):
 
     EF_sh = ((d["e_dry"] * d["EF_th"] + (d["E_ref"] * (45.0 / d_um) ** 0.5) * d["EF_el"]) / 1000.0 + d["dist_sh"] * d["EF_tr"] / 1000.0 - d["c_land"])
     EFcem = d["EFcem"].copy()
+    if path == "BLEND":
+        EFcem = (1.0 - fs) * EFcem + fs * cfg.get("EF_slag", 0.07)
     if path == "P2":
         sh_proc = (d["e_dry"] * d["EF_th"] + d["E_cr"] * d["EF_el"]) / 1000.0 + d["dist_sh"] * d["EF_tr"] / 1000.0 - d["c_land"] + d["kiln_pen"]
         calc = rho * d["mCaCO3"]
@@ -370,7 +380,8 @@ def verify():
     res["life365_calibration"] = dict(zeta=CAL["zeta"], max_ratio_model_to_life365=CAL["max_ratio"])
     tgt = fc28(d, d["B"], d["wb"] * d["B"], 0.0, 25.0, d["Tcure"]); Bm, mt = match_binder(d, d["B"], d["wb"] * d["B"], 0.25, 25.0, d["Tcure"], tgt)
     ferr = np.abs(fc28(d, Bm, d["wb"] * d["B"], 0.25, 25.0, d["Tcure"]) / tgt - 1)
-    res["strength_matching_max_rel_err_matched_draws"] = float(np.max(ferr[mt])); res["strength_matching_feasible_fraction_r25"] = float(np.mean(mt)); assert res["strength_matching_max_rel_err_matched_draws"] < 5e-3
+    added = mt & (Bm > d["B"] * (1 + 1e-9))      # v3: with k_f > 0 the shell mix can already exceed the target at the original binder content (no binder is added or removed)
+    res["strength_matching_max_rel_err_matched_draws"] = float(np.max(ferr[added])) if added.any() else 0.0; res["strength_matching_feasible_fraction_r25"] = float(np.mean(mt)); assert res["strength_matching_max_rel_err_matched_draws"] < 5e-3
     res["status"] = "all assertions passed"
     return res
 
