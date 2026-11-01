@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+*.log
+done.flag
+node_modules/
