@@ -26,11 +26,11 @@ git push -u origin main; Check "git push main"
 git push origin --tags --force; Check "git push tags"
 
 # 3. release with the manuscript PDFs
-gh release create v1.2.2 `
+gh release create v1.2.3 `
     "manuscript\Oyster_P1_CBM_Manuscript.pdf" `
     "manuscript\Oyster_P1_CBM_Supplementary_Information.pdf" `
     "manuscript\Cover_Letter_CBM.pdf" `
-    --repo $slug --title "v1.2.2" `
+    --repo $slug --title "v1.2.3" `
     --notes "Code, tests, results and manuscript for the Construction and Building Materials submission. Zenodo: software 10.5281/zenodo.23867048, preprint 10.5281/zenodo.23867044."
 Check "gh release create"
 
