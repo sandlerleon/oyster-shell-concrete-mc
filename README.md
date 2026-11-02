@@ -2,7 +2,7 @@
 
 Leon Sandler, Independent Researcher (Northbrook, Illinois, USA) - sandler.leon@gmail.com - ORCID 0009-0007-4584-808X
 
-Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.2.2.
+Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.2.3. Version 1.2.3 changes only the manuscript files: the language-edited text was merged selectively (see `manuscript/README_MANUSCRIPT.md`) and the keyword list was reduced to six; no code, result or figure changed.
 
 Archived on Zenodo: software doi:[10.5281/zenodo.23867048](https://doi.org/10.5281/zenodo.23867048) (all versions), manuscript preprint doi:[10.5281/zenodo.23867044](https://doi.org/10.5281/zenodo.23867044) (all versions).
 Companion paper (allocation of shell between reef restoration, concrete and disposal; Journal of Cleaner Production): [https://github.com/sandlerleon/oyster-shell-allocation-mc](https://github.com/sandlerleon/oyster-shell-allocation-mc), doi:[10.5281/zenodo.23867050](https://doi.org/10.5281/zenodo.23867050).
