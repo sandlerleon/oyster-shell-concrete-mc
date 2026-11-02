@@ -2,7 +2,7 @@
 
 Leon Sandler, Independent Researcher (Northbrook, Illinois, USA) - sandler.leon@gmail.com - ORCID 0009-0007-4584-808X
 
-Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.1.0.
+Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.2.0.
 
 Archived on Zenodo: software doi:[10.5281/zenodo.23867048](https://doi.org/10.5281/zenodo.23867048) (all versions), manuscript preprint doi:[10.5281/zenodo.23867044](https://doi.org/10.5281/zenodo.23867044) (all versions).
 Companion paper (allocation of shell between reef restoration, concrete and disposal; Journal of Cleaner Production): [https://github.com/sandlerleon/oyster-shell-allocation-mc](https://github.com/sandlerleon/oyster-shell-allocation-mc), doi:[10.5281/zenodo.23867050](https://doi.org/10.5281/zenodo.23867050).
@@ -13,7 +13,7 @@ Companion paper (allocation of shell between reef restoration, concrete and disp
 
 A coupled model links hydration kinetics and porosity, chloride, acid and leaching transport, damage accumulation and cradle-to-gate carbon for two pathways (P1 shell powder replacing cement; P2 shell CaCO3 replacing limestone in kiln feed) in three cases (pavement, dam, marine culvert), with paired shell/OPC Monte Carlo draws, Sobol sensitivity and a falsification region.
 
-**Version 1.1.0 changes.** (1) The inert-filler strength model is rejected by scallop-shell data (`calibrate_abbas.py`, `kf0_prediction.py`). (2) An effective strength-efficiency coefficient `k_f` calibrated on that study is tested, with frozen parameters, on 11 independent oyster-shell points from three studies (`validate_independent.py`); it does not outperform dilution-only or inert models, and `k_f` differs between studies. (3) The primary results use a pooled random-effects distribution of `k_f` (`calibrated.py`, `run_*_cal.py`); the original and single-study variants are ablations. (4) A 50 % slag blended-cement reference (`run_blend_cal.py`) and alternative formulations (porosity-coupled and size-dependent `k_f`; `run_alt_cal.py`) are added. (5) `export_joint_draws.py` writes the joint draws used by the companion paper.
+**Version 1.2.0 changes.** (1) The inert-filler strength model is rejected by scallop-shell data (`calibrate_abbas.py`, `kf0_prediction.py`). (2) An effective strength-efficiency coefficient `k_f` calibrated on that study is tested, with frozen parameters, on 11 independent oyster-shell points from three studies (`validate_independent.py`); it does not outperform dilution-only or inert models, and `k_f` differs between studies. (3) The primary results use a pooled random-effects distribution of `k_f` (`calibrated.py`, `run_*_cal.py`); the original and single-study variants are ablations. (4) A 50 % slag blended-cement reference (`run_blend_cal.py`) and alternative formulations (porosity-coupled and size-dependent `k_f`; `run_alt_cal.py`) are added. (5) `export_joint_draws.py` writes the joint draws used by the companion paper. (6) Version 1.2.0 adds a table of the conditions of every probability, a leave-one-study-out analysis of the service-life conclusions (`run_alt_cal.py`), fixed transport-model scenarios, study-level prediction errors and a table of calibrated, uncalibrated and assumed components.
 
 ## Layout
 
@@ -40,7 +40,7 @@ python run_blend_cal.py && python run_alt_cal.py && python make_fig_calibration.
 python -m pytest tests
 ```
 
-The original analysis was re-run from a clean directory and reproduced the original result files to numerical precision (maximum absolute difference about 1e-13).
+The original analysis was re-run from a clean directory and reproduced the original result files to numerical precision (maximum absolute difference about 1e-13). The environment is pinned in `requirements.txt` (Python 3.11); the random seeds are fixed in the scripts (calibration 101/555, validation 2024/99, studies 21, scans 31, Sobol 11, blended benchmark 61, alternatives and leave-one-study-out 21, joint draws 500-530) and are listed in the manuscript appendix; `REPRODUCTION_CHECK.md` records a clean-directory re-run of the scripts against the shipped result files.
 
 ## Limitations
 

@@ -7,6 +7,8 @@ For each case (A pavement, B dam, C culvert) and shell replacement r in (0.10, 0
   rhoL   = L_shell / L_OPC                                                              (service-life ratio, both censored at 100 yr)
   E_sh, E_opc = cradle-to-gate carbon per m3 of shell concrete and of OPC concrete (kg CO2e/m3, shell processing and haul included, avoided-landfill credit included)
   s_kg   = shell mass per m3 of shell concrete (kg)
+  cl_kg  = the landfill-avoidance credit contained in E_sh (kg CO2e per m3; c_land x s_kg), so that E_sh + cl_kg is the carbon of the shell concrete without any disposal credit
+  E_bl, L_bl, c_bl = carbon, life and cement content per m3 of the 50 % slag blended-cement reference of the same draw
 The joint draws preserve the correlations between displacement, life and carbon that arise from the shared mix design and exposure.
 """
 import json
@@ -17,16 +19,17 @@ import numpy as np
 import calibrated as m
 
 OUT = sys.argv[1]
-rows = {k: [] for k in ("case", "r", "delta", "rhoL", "E_sh", "E_opc", "s_kg", "kf", "L_sh", "L_opc", "c_sh", "c_opc")}
+rows = {k: [] for k in ("case", "r", "delta", "rhoL", "E_sh", "E_opc", "s_kg", "kf", "L_sh", "L_opc", "c_sh", "c_opc", "cl_kg", "E_bl", "L_bl", "c_bl")}
 N = 3000
 for ci, case in enumerate("ABC"):
     for r in (0.10, 0.25, 0.50):
         d = m.sample(case, N, seed=500 + 10 * ci + int(100 * r))
         opc = m.evaluate(case, d, dict(path="OPC"))
         sh = m.evaluate(case, d, dict(path="P1", r=r, d_um=30.0, match=True), ref=opc)
+        bl = m.evaluate(case, d, dict(path="BLEND", fs=0.5), ref=opc)
         ok = sh["matched"] & (sh["s"] > 1.0)
         delta = (opc["c"] - sh["c"]) / sh["s"]
-        for k, v in dict(case=np.full(N, ci), r=np.full(N, r), delta=delta, rhoL=sh["L"] / opc["L"], E_sh=sh["E_gate"], E_opc=opc["E_gate"], s_kg=sh["s"], kf=d["kf"], L_sh=sh["L"], L_opc=opc["L"], c_sh=sh["c"], c_opc=opc["c"]).items():
+        for k, v in dict(case=np.full(N, ci), r=np.full(N, r), delta=delta, rhoL=sh["L"] / opc["L"], E_sh=sh["E_gate"], E_opc=opc["E_gate"], s_kg=sh["s"], kf=d["kf"], L_sh=sh["L"], L_opc=opc["L"], c_sh=sh["c"], c_opc=opc["c"], cl_kg=d["c_land"] * sh["s"], E_bl=bl["E_gate"], L_bl=bl["L"], c_bl=bl["c"]).items():
             rows[k].extend([float(x) for x in np.asarray(v)[ok]])
 rows["n"] = len(rows["case"])
 json.dump(rows, open(OUT, "w"))

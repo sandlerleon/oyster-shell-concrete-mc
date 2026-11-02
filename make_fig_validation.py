@@ -50,3 +50,26 @@ for off, v, c, lab in ((-w, v0, GREY, "original inert filler (k_f = 0)"), (0, v1
 a.set_xticks(x); a.set_xticklabels([c[2] for c in cfgs], fontsize=8); a.set_ylabel("P(≥5% carbon cut and non-inferior life)"); a.legend(fontsize=7.5, frameon=False); a.grid(axis="y", alpha=0.3); a.set_ylim(0, 0.45)
 fig.tight_layout(); fig.savefig(OUT + "/fig13_ablation.png", dpi=200, facecolor="white"); plt.close(fig)
 print("ok")
+
+# ---- study-level prediction errors (fig14): MAE and RMSE per study and model, and pooled leave-one-study-out against simple rules
+CMP = V["comparison"]
+models = [("Abbas-calibrated posterior (frozen)", "Abbas-calibrated (frozen)", BLUE), ("original inert-filler model (k_f = 0)", "inert filler (k_f = 0)", GREY), ("Bolomey dilution only", "Bolomey dilution", ORANGE), ("Bolomey k-value 0.25", "Bolomey k = 0.25", TEAL)]
+studies = [("all", "all 11"), ("KWON", "Kwon & Wang"), ("ABIN", "Abinaya (sec.)"), ("MEX", "Mortar 2026")]
+fig, ax = plt.subplots(1, 3, figsize=(12.4, 3.7), gridspec_kw={"width_ratios": [1.15, 1.15, 1.0]})
+for a, key, ttl in ((ax[0], "MAE", "(a) Mean absolute error"), (ax[1], "RMSE", "(b) Root-mean-square error")):
+    w = 0.2
+    for j, (lab, short, col) in enumerate(models):
+        vals = [CMP[lab][s][key] for s, _ in studies]
+        a.bar(np.arange(len(studies)) + (j - 1.5) * w, vals, w, color=col, label=short)
+    a.set_xticks(range(len(studies))); a.set_xticklabels([s[1] for s in studies], fontsize=8); a.grid(axis="y", alpha=0.3); a.set_title(ttl, fontsize=9.5, loc="left", color=NAVY); a.set_ylabel(key)
+ax[0].legend(fontsize=7, frameon=False)
+c = ax[2]; D = V["datasets"]; bol = lambda r, k, ratio: ((1 - r + k * r) * ratio - 0.5) / (ratio - 0.5)
+names = [("ABBAS", "Abbas"), ("KWON", "Kwon"), ("ABIN", "Abinaya"), ("MEX", "Mortar 2026")]
+pooled = [V["loso"][s]["MAE"] for s, _ in names]
+dil = [float(np.mean([abs(bol(i["r"], 0.0, D[s]["B"] / D[s]["w"]) - i["observed"]) for i in D[s]["items"]])) for s, _ in names]
+k25 = [float(np.mean([abs(bol(i["r"], 0.25, D[s]["B"] / D[s]["w"]) - i["observed"]) for i in D[s]["items"]])) for s, _ in names]
+x = np.arange(4); w = 0.26
+c.bar(x - w, pooled, w, color=BLUE, label="pooled model, leave-one-study-out"); c.bar(x, dil, w, color=ORANGE, label="Bolomey dilution"); c.bar(x + w, k25, w, color=TEAL, label="Bolomey k = 0.25")
+c.set_xticks(x); c.set_xticklabels([n[1] for n in names], fontsize=8); c.set_ylabel("MAE on the held-out study"); c.grid(axis="y", alpha=0.3); c.legend(fontsize=7, frameon=False); c.set_title("(c) Pooled model vs simple rules", fontsize=9.5, loc="left", color=NAVY)
+fig.tight_layout(); fig.savefig(OUT + "/fig14_prediction_error.png", dpi=200, facecolor="white"); plt.close(fig)
+print("fig14 ok", [round(v, 3) for v in pooled], [round(v, 3) for v in dil], [round(v, 3) for v in k25])

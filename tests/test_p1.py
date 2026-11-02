@@ -50,6 +50,17 @@ def test_porosity_coupling_raises_the_pavement_probability():
     assert ALT["claims"]["porosity_coupled"]["A"]["r25m"]["p_adv_mat"] > ALT["claims"]["strength_only"]["A"]["r25m"]["p_adv_mat"]
 
 
+def test_leave_one_study_out_conclusions_are_stable():
+    L = J("shell_cal", "loso_claims.json")
+    pa = [v["claims"]["A"]["r25m"]["p_adv_mat"] for v in L.values()]; pc = [v["claims"]["C"]["r25m"]["p_adv_mat"] for v in L.values()]
+    assert 0.1 < min(pa) and max(pa) < 0.3 and max(pc) < 0.06
+
+
+def test_transport_scenarios_bracket_the_conclusion():
+    t = ALT["transport"]
+    assert t["chi0.0|coupled"]["A"]["r25m"]["p_adv_mat"] > 0.5 > t["chi1.0|strength_only"]["A"]["r25m"]["p_adv_mat"]
+
+
 def test_baseline_recovery_of_original_model():
     import ShellConcreteMC_v2 as m
     v = m.verify()
