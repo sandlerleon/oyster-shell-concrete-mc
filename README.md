@@ -2,7 +2,7 @@
 
 Leon Sandler, Independent Researcher (Northbrook, Illinois, USA) - sandler.leon@gmail.com - ORCID 0009-0007-4584-808X
 
-Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.2.1.
+Code, tests, results and manuscript for *"A Coupled Chemo-Mechanical and Life-Cycle Framework for Oyster-Shell-Derived Cementitious Materials in Aggressive Infrastructure Environments"*, prepared for **Construction and Building Materials** (Elsevier). Current version: 1.2.2.
 
 Archived on Zenodo: software doi:[10.5281/zenodo.23867048](https://doi.org/10.5281/zenodo.23867048) (all versions), manuscript preprint doi:[10.5281/zenodo.23867044](https://doi.org/10.5281/zenodo.23867044) (all versions).
 Companion paper (allocation of shell between reef restoration, concrete and disposal; Journal of Cleaner Production): [https://github.com/sandlerleon/oyster-shell-allocation-mc](https://github.com/sandlerleon/oyster-shell-allocation-mc), doi:[10.5281/zenodo.23867050](https://doi.org/10.5281/zenodo.23867050).
@@ -13,7 +13,7 @@ Companion paper (allocation of shell between reef restoration, concrete and disp
 
 A coupled model links hydration kinetics and porosity, chloride, acid and leaching transport, damage accumulation and cradle-to-gate carbon for two pathways (P1 shell powder replacing cement; P2 shell CaCO3 replacing limestone in kiln feed) in three cases (pavement, dam, marine culvert), with paired shell/OPC Monte Carlo draws, Sobol sensitivity and a falsification region.
 
-**Version 1.2.1 changes.** (1) The inert-filler strength model is rejected by scallop-shell data (`calibrate_abbas.py`, `kf0_prediction.py`). (2) An effective strength-efficiency coefficient `k_f` calibrated on that study is tested, with frozen parameters, on 11 independent oyster-shell points from three studies (`validate_independent.py`); it does not outperform dilution-only or inert models, and `k_f` differs between studies. (3) The primary results use a pooled random-effects distribution of `k_f` (`calibrated.py`, `run_*_cal.py`); the original and single-study variants are ablations. (4) A 50 % slag blended-cement reference (`run_blend_cal.py`) and alternative formulations (porosity-coupled and size-dependent `k_f`; `run_alt_cal.py`) are added. (5) `export_joint_draws.py` writes the joint draws used by the companion paper. (6) Version 1.2.0 adds a table of the conditions of every probability, a leave-one-study-out analysis of the service-life conclusions (`run_alt_cal.py`), fixed transport-model scenarios, study-level prediction errors and a table of calibrated, uncalibrated and assumed components.
+**Version 1.2.2 changes.** (1) The inert-filler strength model is rejected by scallop-shell data (`calibrate_abbas.py`, `kf0_prediction.py`). (2) An effective strength-efficiency coefficient `k_f` calibrated on that study is tested, with frozen parameters, on 11 independent oyster-shell points from three studies (`validate_independent.py`); it does not outperform dilution-only or inert models, and `k_f` differs between studies. (3) The primary results use a pooled random-effects distribution of `k_f` (`calibrated.py`, `run_*_cal.py`); the original and single-study variants are ablations. (4) A 50 % slag blended-cement reference (`run_blend_cal.py`) and alternative formulations (porosity-coupled and size-dependent `k_f`; `run_alt_cal.py`) are added. (5) `export_joint_draws.py` writes the joint draws used by the companion paper. (6) Version 1.2.0 adds a table of the conditions of every probability, a leave-one-study-out analysis of the service-life conclusions (`run_alt_cal.py`), fixed transport-model scenarios, study-level prediction errors and a table of calibrated, uncalibrated and assumed components.
 
 ## Layout
 
@@ -26,6 +26,7 @@ A coupled model links hydration kinetics and porosity, chloride, acid and leachi
 | `run_stage1*.py`, `run_sobol*.py`, `run_extras*.py`, `run_figs*.py` | stages of the original (`shell_out/`) and primary (`*_cal`, `shell_cal/`) analyses |
 | `run_blend_cal.py`, `run_alt_cal.py`, `make_fig_*.py`, `export_joint_draws.py` | blended-cement benchmark, alternatives, figures, export of joint draws |
 | `shell_out/`, `shell_cal/` | result files (JSON) and figures |
+| `build_manuscript.py` | regenerates the manuscript from the result files and compares it with the shipped one |
 | `tests/test_p1.py` | automated checks |
 | `manuscript/` | manuscript (docx, PDF), supplementary information, cover letter, highlights, builder script |
 
@@ -37,6 +38,7 @@ python ShellConcreteMC_v2.py --verify
 python calibrate_abbas.py && python kf0_prediction.py && python validate_independent.py
 python run_stage1_cal.py && python run_sobol_cal.py A 2048 && python run_sobol_cal.py B 2048 && python run_sobol_cal.py C 2048 && python run_extras_cal.py && python run_figs_cal.py
 python run_blend_cal.py && python run_alt_cal.py && python make_fig_calibration.py shell_out && python make_fig_validation.py shell_cal
+python build_manuscript.py --compare   # rebuilds the manuscript (needs Node.js) and compares every paragraph and table cell with the shipped one
 python -m pytest tests
 ```
 

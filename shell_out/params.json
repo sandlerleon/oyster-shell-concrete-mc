@@ -1,0 +1,723 @@
+{
+ "common": {
+  "k0": [
+   "logn",
+   0.26,
+   0.2
+  ],
+  "nh": [
+   "uni",
+   1.5,
+   2.5
+  ],
+  "Ea_h": [
+   "uni",
+   30000.0,
+   45000.0
+  ],
+  "acap": [
+   "uni",
+   0.9,
+   0.97
+  ],
+  "S0": [
+   "logn",
+   78.0,
+   0.1
+  ],
+  "kap_s": [
+   "uni",
+   1.8,
+   3.0
+  ],
+  "nu": [
+   "uni",
+   0.0,
+   1.5
+  ],
+  "bpack": [
+   "uni",
+   0.0,
+   0.3
+  ],
+  "o_org": [
+   "tri",
+   0.005,
+   0.02,
+   0.04
+  ],
+  "eta_w": [
+   "uni",
+   0.3,
+   0.9
+  ],
+  "kap_o": [
+   "logu",
+   5.0,
+   200.0
+  ],
+  "kimp": [
+   "uni",
+   0.0,
+   0.05
+  ],
+  "lamD": [
+   "logn",
+   1.0,
+   0.4
+  ],
+  "chi_D": [
+   "uni",
+   0.0,
+   1.0
+  ],
+  "dzeta": [
+   "uni",
+   -0.3,
+   0.3
+  ],
+  "m0": [
+   "tri",
+   0.12,
+   0.2,
+   0.3
+  ],
+  "omega": [
+   "uni",
+   0.0,
+   0.3
+  ],
+  "kapc": [
+   "uni",
+   2.0,
+   20.0
+  ],
+  "UD": [
+   "uni",
+   35000.0,
+   50000.0
+  ],
+  "Ccrit": [
+   "tri",
+   0.6,
+   1.0,
+   1.6
+  ],
+  "tprop": [
+   "tri",
+   3.0,
+   6.0,
+   12.0
+  ],
+  "eps0": [
+   "tri",
+   400.0,
+   600.0,
+   900.0
+  ],
+  "tau_sh": [
+   "tri",
+   20.0,
+   35.0,
+   60.0
+  ],
+  "KR": [
+   "uni",
+   0.2,
+   0.6
+  ],
+  "psi": [
+   "uni",
+   0.4,
+   0.7
+  ],
+  "d_cr": [
+   "uni",
+   0.03,
+   0.1
+  ],
+  "f_env": [
+   "uni",
+   0.05,
+   0.25
+  ],
+  "a_air": [
+   "tri",
+   0.02,
+   0.05,
+   0.07
+  ],
+  "S_crit": [
+   "uni",
+   0.8,
+   0.92
+  ],
+  "d1": [
+   "logu",
+   0.0003,
+   0.003
+  ],
+  "q_ft": [
+   "uni",
+   1.0,
+   3.0
+  ],
+  "var_t": [
+   "tri",
+   0.85,
+   1.0,
+   1.15
+  ],
+  "n_traf": [
+   "logu",
+   50000.0,
+   1000000.0
+  ],
+  "Dfail": [
+   "tri",
+   0.2,
+   0.3,
+   0.4
+  ],
+  "Qcem": [
+   "uni",
+   350.0,
+   480.0
+  ],
+  "psiT": [
+   "uni",
+   0.5,
+   0.9
+  ],
+  "Rres": [
+   "uni",
+   0.3,
+   0.7
+  ],
+  "alphaT": [
+   "uni",
+   8e-06,
+   1.2e-05
+  ],
+  "Csat": [
+   "uni",
+   15.0,
+   22.0
+  ],
+  "xi_L": [
+   "uni",
+   0.3,
+   0.7
+  ],
+  "kK": [
+   "logu",
+   0.03,
+   1.0
+  ],
+  "x_lim_L": [
+   "tri",
+   30.0,
+   50.0,
+   100.0
+  ],
+  "Dratio_Ca": [
+   "uni",
+   0.5,
+   1.5
+  ],
+  "xiN": [
+   "uni",
+   0.4,
+   0.8
+  ],
+  "dc": [
+   "logu",
+   50.0,
+   300.0
+  ],
+  "DH": [
+   "uni",
+   3.0,
+   8.0
+  ],
+  "x_lim_A": [
+   "tri",
+   10.0,
+   20.0,
+   30.0
+  ],
+  "k_ab": [
+   "tri",
+   0.05,
+   0.3,
+   1.0
+  ],
+  "b_ab": [
+   "uni",
+   1.5,
+   2.5
+  ],
+  "w_lim": [
+   "tri",
+   15.0,
+   25.0,
+   40.0
+  ],
+  "EFcem": [
+   "tri",
+   0.75,
+   0.85,
+   0.95
+  ],
+  "mCaCO3": [
+   "tri",
+   1.0,
+   1.1,
+   1.2
+  ],
+  "EFagg": [
+   "tri",
+   0.004,
+   0.007,
+   0.012
+  ],
+  "EFmisc": [
+   "tri",
+   5.0,
+   10.0,
+   20.0
+  ],
+  "e_dry": [
+   "tri",
+   20.0,
+   60.0,
+   150.0
+  ],
+  "E_ref": [
+   "tri",
+   25.0,
+   45.0,
+   90.0
+  ],
+  "E_cr": [
+   "tri",
+   5.0,
+   10.0,
+   20.0
+  ],
+  "EF_el": [
+   "tri",
+   0.1,
+   0.4,
+   0.8
+  ],
+  "EF_th": [
+   "tri",
+   0.2,
+   0.23,
+   0.3
+  ],
+  "dist_sh": [
+   "tri",
+   30.0,
+   150.0,
+   600.0
+  ],
+  "EF_tr": [
+   "tri",
+   0.07,
+   0.1,
+   0.15
+  ],
+  "c_land": [
+   "tri",
+   0.0,
+   0.005,
+   0.02
+  ],
+  "EF_lq": [
+   "tri",
+   0.003,
+   0.006,
+   0.012
+  ],
+  "kiln_pen": [
+   "tri",
+   0.0,
+   0.005,
+   0.02
+  ],
+  "p_sh": [
+   "uni",
+   0.92,
+   0.98
+  ]
+ },
+ "cases": {
+  "A": {
+   "name": "Highway rigid pavement",
+   "B": [
+    "tri",
+    320.0,
+    350.0,
+    400.0
+   ],
+   "wb": [
+    "tri",
+    0.38,
+    0.42,
+    0.46
+   ],
+   "Cs": [
+    "tri",
+    2.0,
+    5.0,
+    9.0
+   ],
+   "cover": [
+    "tri",
+    50.0,
+    70.0,
+    100.0
+   ],
+   "Tenv": [
+    "tri",
+    2.0,
+    10.0,
+    18.0
+   ],
+   "RH": [
+    "uni",
+    55.0,
+    90.0
+   ],
+   "a_f": [
+    "uni",
+    0.1,
+    0.5
+   ],
+   "n_ft": [
+    "tri",
+    10.0,
+    40.0,
+    90.0
+   ],
+   "Tcure": [
+    "tri",
+    5.0,
+    20.0,
+    35.0
+   ],
+   "Econ": [
+    "tri",
+    15.0,
+    30.0,
+    55.0
+   ]
+  },
+  "B": {
+   "name": "Dam (mass concrete)",
+   "B": [
+    "tri",
+    180.0,
+    230.0,
+    280.0
+   ],
+   "wb": [
+    "tri",
+    0.45,
+    0.5,
+    0.6
+   ],
+   "Cs": [
+    "tri",
+    0.0,
+    0.0001,
+    0.0002
+   ],
+   "cover": [
+    "tri",
+    50.0,
+    70.0,
+    100.0
+   ],
+   "Tenv": [
+    "tri",
+    4.0,
+    10.0,
+    16.0
+   ],
+   "RH": [
+    "uni",
+    90.0,
+    100.0
+   ],
+   "a_f": [
+    "uni",
+    0.2,
+    0.7
+   ],
+   "n_ft": [
+    "tri",
+    0.0,
+    15.0,
+    50.0
+   ],
+   "Tcure": [
+    "tri",
+    10.0,
+    15.0,
+    25.0
+   ],
+   "Econ": [
+    "tri",
+    10.0,
+    20.0,
+    40.0
+   ],
+   "grad": [
+    "tri",
+    5.0,
+    20.0,
+    60.0
+   ]
+  },
+  "C": {
+   "name": "Marine culvert / riverbed",
+   "B": [
+    "tri",
+    340.0,
+    370.0,
+    420.0
+   ],
+   "wb": [
+    "tri",
+    0.38,
+    0.42,
+    0.46
+   ],
+   "Cs": [
+    "tri",
+    3.0,
+    6.0,
+    12.0
+   ],
+   "cover": [
+    "tri",
+    50.0,
+    65.0,
+    90.0
+   ],
+   "Tenv": [
+    "tri",
+    8.0,
+    16.0,
+    26.0
+   ],
+   "RH": [
+    "uni",
+    85.0,
+    100.0
+   ],
+   "a_f": [
+    "uni",
+    0.3,
+    0.9
+   ],
+   "n_ft": [
+    "tri",
+    0.0,
+    20.0,
+    60.0
+   ],
+   "Tcure": [
+    "tri",
+    5.0,
+    20.0,
+    35.0
+   ],
+   "Econ": [
+    "tri",
+    10.0,
+    25.0,
+    45.0
+   ]
+  }
+ },
+ "lab": {
+  "k0": "Hydration rate",
+  "nh": "Reaction order",
+  "Ea_h": "Hydration Ea",
+  "acap": "Max. hydration",
+  "S0": "Gel strength S0",
+  "kap_s": "Strength exponent",
+  "nu": "Filler nucleation",
+  "bpack": "Packing bonus",
+  "o_org": "Shell organics",
+  "eta_w": "Washing efficiency",
+  "kap_o": "Organic retardation",
+  "kimp": "Impurity penalty",
+  "lamD": "D28 factor",
+  "chi_D": "D28 model form",
+  "dzeta": "Porosity exponent",
+  "m0": "Age exponent m",
+  "omega": "m shift",
+  "kapc": "Crack\u2013diffusion coupling",
+  "UD": "Diffusion Ea",
+  "Ccrit": "Critical chloride",
+  "tprop": "Propagation period",
+  "eps0": "Shrinkage strain",
+  "tau_sh": "Shrinkage time",
+  "KR": "Restraint",
+  "psi": "Creep relaxation",
+  "d_cr": "Early crack damage",
+  "f_env": "Curling factor",
+  "a_air": "Air content",
+  "S_crit": "Critical saturation",
+  "d1": "FT damage/cycle",
+  "q_ft": "FT exponent",
+  "var_t": "Load variability",
+  "n_traf": "Traffic cycles/yr",
+  "Dfail": "Failure damage",
+  "Qcem": "Heat of hydration",
+  "psiT": "Thermal drop",
+  "Rres": "Thermal restraint",
+  "alphaT": "Thermal expansion",
+  "Csat": "Leaching saturation",
+  "xi_L": "Leachable Ca",
+  "kK": "Permeability factor",
+  "x_lim_L": "Leaching limit",
+  "Dratio_Ca": "Ca diffusivity",
+  "xiN": "Acid-accessible Ca",
+  "dc": "Calcite access size",
+  "DH": "H+ diffusivity",
+  "x_lim_A": "Acid limit",
+  "k_ab": "Abrasion rate",
+  "b_ab": "Abrasion exponent",
+  "w_lim": "Wear limit",
+  "EFcem": "Cement EF",
+  "mCaCO3": "Raw-meal CaCO3",
+  "EFagg": "Aggregate EF",
+  "EFmisc": "Water/admixture EF",
+  "e_dry": "Shell drying energy",
+  "E_ref": "Grinding energy",
+  "E_cr": "Crushing energy",
+  "EF_el": "Electricity EF",
+  "EF_th": "Heat EF",
+  "dist_sh": "Shell haul distance",
+  "EF_tr": "Truck EF",
+  "c_land": "Landfill credit",
+  "EF_lq": "Limestone EF",
+  "kiln_pen": "Kiln penalty",
+  "p_sh": "Shell purity",
+  "B": "Binder content",
+  "wb": "w/b",
+  "Cs": "Surface chloride",
+  "cover": "Cover",
+  "Tenv": "Service temperature",
+  "RH": "Relative humidity",
+  "a_f": "Air-void filling",
+  "n_ft": "Freeze\u2013thaw cycles/yr",
+  "Tcure": "Curing temperature",
+  "Econ": "Construction emissions",
+  "grad": "Hydraulic gradient"
+ },
+ "units": {
+  "k0": "1/d",
+  "nh": "-",
+  "Ea_h": "J/mol",
+  "acap": "-",
+  "S0": "MPa",
+  "kap_s": "-",
+  "nu": "-",
+  "bpack": "-",
+  "o_org": "kg/kg",
+  "eta_w": "-",
+  "kap_o": "-",
+  "kimp": "-",
+  "lamD": "-",
+  "chi_D": "-",
+  "dzeta": "-",
+  "m0": "-",
+  "omega": "-",
+  "kapc": "-",
+  "UD": "J/mol",
+  "Ccrit": "kg/m3",
+  "tprop": "yr",
+  "eps0": "microstrain",
+  "tau_sh": "d",
+  "KR": "-",
+  "psi": "-",
+  "d_cr": "-",
+  "f_env": "-",
+  "a_air": "m3/m3",
+  "S_crit": "-",
+  "d1": "damage/cycle",
+  "q_ft": "-",
+  "var_t": "-",
+  "n_traf": "cycles/yr",
+  "Dfail": "-",
+  "Qcem": "kJ/kg",
+  "psiT": "-",
+  "Rres": "-",
+  "alphaT": "1/K",
+  "Csat": "mol/m3",
+  "xi_L": "-",
+  "kK": "1/m",
+  "x_lim_L": "mm",
+  "Dratio_Ca": "-",
+  "xiN": "-",
+  "dc": "um",
+  "DH": "-",
+  "x_lim_A": "mm",
+  "k_ab": "mm/yr",
+  "b_ab": "-",
+  "w_lim": "mm",
+  "EFcem": "kgCO2e/kg",
+  "mCaCO3": "kg/kg",
+  "EFagg": "kgCO2e/kg",
+  "EFmisc": "kgCO2e/m3",
+  "e_dry": "kWh/t",
+  "E_ref": "kWh/t",
+  "E_cr": "kWh/t",
+  "EF_el": "kgCO2e/kWh",
+  "EF_th": "kgCO2e/kWh",
+  "dist_sh": "km",
+  "EF_tr": "kgCO2e/t-km",
+  "c_land": "kgCO2e/kg",
+  "EF_lq": "kgCO2e/kg",
+  "kiln_pen": "kgCO2e/kg",
+  "p_sh": "-",
+  "B": "kg/m3",
+  "wb": "-",
+  "Cs": "kg/m3",
+  "cover": "mm",
+  "Tenv": "C",
+  "RH": "%",
+  "a_f": "-",
+  "n_ft": "cycles/yr",
+  "Tcure": "C",
+  "Econ": "kgCO2e/m3",
+  "grad": "-"
+ },
+ "load": {
+  "0": 0.28,
+  "1": 0.38,
+  "2": 0.46
+ },
+ "acid": {
+  "0": 0.03,
+  "1": 0.3,
+  "2": 3.0
+ },
+ "csmult": {
+  "0": 0.5,
+  "1": 1.0,
+  "2": 2.0
+ },
+ "leach": {
+  "0": 0.5,
+  "1": 1.0,
+  "2": 1.5
+ }
+}
